@@ -18,8 +18,8 @@ public class ControllerProgramaAcademico {
     public String callServicePrograma() {
 
         Persona objPersona = new Persona();
-        objPersona.setNombre("Carlos");
-        objPersona.setApellido("Romero");
+        objPersona.setNombre("Omar");
+        objPersona.setApellido("Velez");
         objPersona.setEdad(24);
 
         String salida = serviceProgramaAcademico.inscribirAlumno(objPersona);
