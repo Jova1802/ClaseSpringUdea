@@ -24,7 +24,6 @@ public class ServiceProgramaAcademico {
                         " años, quedo inscrito al programa";
         return inscripcion;
     }
-
     public ArrayList doWhile (int a){
         ArrayList<String> objTraza = new ArrayList();
         do {
@@ -45,10 +44,8 @@ public class ServiceProgramaAcademico {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public boolean addPersonaCC(Persona persona, String doc){
-
         Persona objPersona = new Persona();
         objPersona.setNombre(persona.getNombre());
         objPersona.setApellido(persona.getApellido());
@@ -60,7 +57,6 @@ public class ServiceProgramaAcademico {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public boolean addPersonaTI(Persona persona, String doc){
 
@@ -76,7 +72,6 @@ public class ServiceProgramaAcademico {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public ArrayList<Persona> listar (){
 
