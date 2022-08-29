@@ -74,9 +74,11 @@ public class ControllerProgramaAcademico {
 
     }
 
-    @PostMapping(path = "/udea/mintic/crearPersona/{doc}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/udea/mintic/crearPersona/{doc}", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Persona> crearPersonaCondicional(@RequestBody Persona persona, @PathVariable String doc) {
 
+        //TODO: Buscar persona antes de insertar, validar si existe ya.
         switch (doc) {
             case "CC":
                 serviceProgramaAcademico.addPersonaCC(persona, doc);
@@ -94,5 +96,33 @@ public class ControllerProgramaAcademico {
 
     }
 
+    @PutMapping(path = "/udea/mintic/actualizarPersona", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Persona> actualizarPErsonar(@RequestParam int id, @RequestParam String nombreModificado) {
+
+        Persona p = serviceProgramaAcademico.buscarPersona(id);
+        p.setNombre(nombreModificado);
+
+        System.out.println("Metodo Put");
+
+        return new ResponseEntity<Persona>(p, HttpStatus.OK);
+    }
+
+    @PatchMapping(path = "/udea/mintic/actualizarPersonaPP", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> actuializarPersonaParcial() {
+
+        String retorno = "Actualizacion parcial de dominio";
+        System.out.println("Ok, metodo patch");
+        return new ResponseEntity<String>(retorno, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping(path = "/udea/mintic/borrarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id){
+
+        Persona p = serviceProgramaAcademico.buscarPersona(id);
+        Boolean salida = serviceProgramaAcademico.borrarPersona(p);
+        return new ResponseEntity<Boolean>(salida, HttpStatus.OK);
+
+    }
 }
 
