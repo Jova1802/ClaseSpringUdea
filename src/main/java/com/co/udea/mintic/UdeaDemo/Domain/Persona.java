@@ -1,16 +1,12 @@
 package com.co.udea.mintic.UdeaDemo.Domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-public class Persona {
-
-    @Getter @Setter
+@Data public class Persona {
     private String nombre;
-    @Getter @Setter
     private String apellido;
-    @Getter @Setter
     private int edad;
-
+    private int id;
+    private String doc;
 }
 
