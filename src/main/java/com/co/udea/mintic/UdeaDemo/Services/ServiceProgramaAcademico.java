@@ -88,4 +88,11 @@ public class ServiceProgramaAcademico {
         }
         return persona;
     }
+
+    public Boolean borrarPersona(Persona persona) {
+
+        listaP.remove(persona);
+
+        return Boolean.TRUE;
+    }
 }
