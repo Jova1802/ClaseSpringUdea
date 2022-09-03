@@ -106,6 +106,36 @@ public class ControllerPersona {
 
     @PutMapping(path = "/udea/mintic/actualizarPersona", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Persona> actualizarPErsonar(@RequestParam int id, @RequestParam String nombreModificado) {
+<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Controler/ControllerPersona.java
+=======
+
+        Persona p = serviceProgramaAcademico.buscarPersona(id);
+        p.setNombre(nombreModificado);
+
+        System.out.println("Metodo Put");
+
+        return new ResponseEntity<Persona>(p, HttpStatus.OK);
+    }
+
+    @PatchMapping(path = "/udea/mintic/actualizarPersonaPP", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> actuializarPersonaParcial() {
+
+        String retorno = "Actualizacion parcial de dominio";
+        System.out.println("Ok, metodo patch");
+        return new ResponseEntity<String>(retorno, HttpStatus.OK);
+
+    }
+
+    @DeleteMapping(path = "/udea/mintic/borrarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id){
+
+        Persona p = serviceProgramaAcademico.buscarPersona(id);
+        Boolean salida = serviceProgramaAcademico.borrarPersona(p);
+        return new ResponseEntity<Boolean>(salida, HttpStatus.OK);
+
+    }
+}
+>>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Controler/ControllerProgramaAcademico.java
 
         Persona p = servicePersona.buscarPersona(id);
         p.setNombre(nombreModificado);

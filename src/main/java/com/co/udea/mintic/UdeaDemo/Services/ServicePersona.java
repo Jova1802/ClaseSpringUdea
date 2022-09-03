@@ -24,7 +24,6 @@ public class ServicePersona {
                         " años, quedo inscrito al programa";
         return inscripcion;
     }
-
     public ArrayList doWhile (int a){
         ArrayList<String> objTraza = new ArrayList();
         do {
@@ -45,10 +44,8 @@ public class ServicePersona {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public boolean addPersonaCC(Persona persona, String doc){
-
         Persona objPersona = new Persona();
         objPersona.setNombre(persona.getNombre());
         objPersona.setApellido(persona.getApellido());
@@ -60,7 +57,6 @@ public class ServicePersona {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public boolean addPersonaTI(Persona persona, String doc){
 
@@ -76,7 +72,6 @@ public class ServicePersona {
         listaP.add(objPersona);
 
         return Boolean.TRUE;
-
     }
     public ArrayList<Persona> listar (){
 
@@ -93,10 +88,18 @@ public class ServicePersona {
         }
         return persona;
     }
+<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServicePersona.java
+=======
+
+>>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServiceProgramaAcademico.java
     public Boolean borrarPersona(Persona persona) {
 
         listaP.remove(persona);
 
         return Boolean.TRUE;
     }
+<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServicePersona.java
 }
+=======
+}
+>>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServiceProgramaAcademico.java
