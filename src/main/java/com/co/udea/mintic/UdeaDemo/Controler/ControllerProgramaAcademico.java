@@ -2,6 +2,9 @@ package com.co.udea.mintic.UdeaDemo.Controler;
 
 import com.co.udea.mintic.UdeaDemo.Domain.Persona;
 import com.co.udea.mintic.UdeaDemo.Services.ServiceProgramaAcademico;
+import com.co.udea.mintic.UdeaDemo.Util.UtilidadesComunes;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,13 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@Api(tags = "persona", description = "Metodos para Api persona")
 @RestController
 @RequestMapping(value = "/persona")
 public class ControllerProgramaAcademico {
 
     @Autowired
     ServiceProgramaAcademico serviceProgramaAcademico;
+    @Autowired
+    UtilidadesComunes utilidadesComunes;
 
+    @ApiOperation(value = "Endpoint para listar user")
     @GetMapping(path = "/udea/mintic/program", produces = "application/json")
     public ResponseEntity<String> callServicePrograma() {
 
@@ -43,7 +50,7 @@ public class ControllerProgramaAcademico {
     @GetMapping(path = "/udea/mintic/listaPersonas", produces = MediaType.APPLICATION_JSON_VALUE)
     public ArrayList<Persona> listaPersonas() {
 
-
+        utilidadesComunes.mensaje();
         return serviceProgramaAcademico.listar();
     }
 
