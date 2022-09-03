@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class ServiceProgramaAcademico {
+public class ServicePersona {
 
     @Getter @Setter
     private String nombrePrograma;
     ArrayList <Persona> listaP;
 
-    public ServiceProgramaAcademico(ArrayList<Persona> listaP) {
+    public ServicePersona(ArrayList<Persona> listaP) {
         this.listaP = listaP;
     }
 
@@ -88,11 +88,18 @@ public class ServiceProgramaAcademico {
         }
         return persona;
     }
+<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServicePersona.java
+=======
 
+>>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServiceProgramaAcademico.java
     public Boolean borrarPersona(Persona persona) {
 
         listaP.remove(persona);
 
         return Boolean.TRUE;
     }
+<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServicePersona.java
 }
+=======
+}
+>>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Services/ServiceProgramaAcademico.java
