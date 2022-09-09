@@ -2,7 +2,9 @@
 package com.co.udea.mintic.UdeaDemo.Controler;
 
 import com.co.udea.mintic.UdeaDemo.Domain.Persona;
+import com.co.udea.mintic.UdeaDemo.Repository.EntityPersona;
 import com.co.udea.mintic.UdeaDemo.Services.ServicePersona;
+import com.co.udea.mintic.UdeaDemo.Util.EnumRol;
 import com.co.udea.mintic.UdeaDemo.Util.UtilidadesComunes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -105,37 +107,7 @@ public class ControllerPersona {
     }
 
     @PutMapping(path = "/udea/mintic/actualizarPersona", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Persona> actualizarPErsonar(@RequestParam int id, @RequestParam String nombreModificado) {
-<<<<<<< HEAD:src/main/java/com/co/udea/mintic/UdeaDemo/Controler/ControllerPersona.java
-=======
-
-        Persona p = serviceProgramaAcademico.buscarPersona(id);
-        p.setNombre(nombreModificado);
-
-        System.out.println("Metodo Put");
-
-        return new ResponseEntity<Persona>(p, HttpStatus.OK);
-    }
-
-    @PatchMapping(path = "/udea/mintic/actualizarPersonaPP", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> actuializarPersonaParcial() {
-
-        String retorno = "Actualizacion parcial de dominio";
-        System.out.println("Ok, metodo patch");
-        return new ResponseEntity<String>(retorno, HttpStatus.OK);
-
-    }
-
-    @DeleteMapping(path = "/udea/mintic/borrarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id){
-
-        Persona p = serviceProgramaAcademico.buscarPersona(id);
-        Boolean salida = serviceProgramaAcademico.borrarPersona(p);
-        return new ResponseEntity<Boolean>(salida, HttpStatus.OK);
-
-    }
-}
->>>>>>> Developer:src/main/java/com/co/udea/mintic/UdeaDemo/Controler/ControllerProgramaAcademico.java
+    public ResponseEntity<Persona> actualizarPersona(@RequestParam int id, @RequestParam String nombreModificado) {
 
         Persona p = servicePersona.buscarPersona(id);
         p.setNombre(nombreModificado);
@@ -145,6 +117,7 @@ public class ControllerPersona {
         return new ResponseEntity<Persona>(p, HttpStatus.OK);
     }
 
+
     @PatchMapping(path = "/udea/mintic/actualizarPersonaPP", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> actuializarPersonaParcial() {
 
@@ -155,11 +128,56 @@ public class ControllerPersona {
     }
 
     @DeleteMapping(path = "/udea/mintic/borrarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id){
+    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id) {
 
         Persona p = servicePersona.buscarPersona(id);
         Boolean salida = servicePersona.borrarPersona(p);
         return new ResponseEntity<Boolean>(salida, HttpStatus.OK);
 
     }
+
+    @GetMapping(path = "/udea/mintic/listarTodoJPA", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> listarTodo() {
+
+        return new ResponseEntity<Object>(servicePersona.listarTodoJPA(), HttpStatus.OK);
+
+    }
+
+    @PostMapping(path = "/udea/mintic/insertarPersonaJPA", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> insertarPersona(@RequestBody EntityPersona persona){
+
+        return new ResponseEntity<Boolean>(servicePersona.insertarPersonaJPA(persona), HttpStatus.OK);
+
+    }
+
+    @PutMapping(path = "/udea/mintic/actualizarTodoJPA", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> actualizarTodoJPA(@RequestBody EntityPersona persona){
+
+        return new ResponseEntity<Boolean>(servicePersona.actualizarTodoJPA(persona), HttpStatus.OK);
+
+    }
+
+    @PatchMapping(path = "/udea/mintic/actualizarParcialJPA", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void insertarParcialJPA(@RequestBody EntityPersona persona){
+
+        servicePersona.actualizarParcialJPA(persona);
+
+    }
+
+    @DeleteMapping(path = "/udea/mintic/borrarPersonaJPA/{id}")
+    public void borrarPersonaJPA(@PathVariable Long id){
+
+        servicePersona.deletePersonaJPA(id);
+
+    }
+
+    @PostMapping(path = "/udea/mintic/insertarPersonaRol", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void insertarPërsonaRol(@RequestBody EntityPersona persona){
+
+        servicePersona.insertarPersonaRol(persona);
+
+    }
+
+
+
 }
