@@ -4,6 +4,7 @@ package com.co.udea.mintic.UdeaDemo.Controler;
 import com.co.udea.mintic.UdeaDemo.Domain.Persona;
 import com.co.udea.mintic.UdeaDemo.Repository.EntityPersona;
 import com.co.udea.mintic.UdeaDemo.Services.ServicePersona;
+import com.co.udea.mintic.UdeaDemo.Util.EnumRol;
 import com.co.udea.mintic.UdeaDemo.Util.UtilidadesComunes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -169,4 +170,14 @@ public class ControllerPersona {
         servicePersona.deletePersonaJPA(id);
 
     }
+
+    @PostMapping(path = "/udea/mintic/insertarPersonaRol", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void insertarPërsonaRol(@RequestBody EntityPersona persona){
+
+        servicePersona.insertarPersonaRol(persona);
+
+    }
+
+
+
 }

@@ -1,8 +1,11 @@
 package com.co.udea.mintic.UdeaDemo.Services;
 
 import com.co.udea.mintic.UdeaDemo.Domain.Persona;
+import com.co.udea.mintic.UdeaDemo.Repository.EntityPermisos;
 import com.co.udea.mintic.UdeaDemo.Repository.EntityPersona;
+import com.co.udea.mintic.UdeaDemo.Repository.RepositoryPermiso;
 import com.co.udea.mintic.UdeaDemo.Repository.RepositoryPersona;
+import com.co.udea.mintic.UdeaDemo.Util.EnumRol;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class ServicePersona {
 
     @Autowired
     RepositoryPersona repositoryPersona;
+
+    @Autowired
+    RepositoryPermiso repositoryPermiso;
 
     ArrayList<Persona> listaP;
 
@@ -154,10 +160,38 @@ public class ServicePersona {
         }
 
         repositoryPersona.save(personaTemp);
+
+
     }
 
     public void deletePersonaJPA(Long id){
         repositoryPersona.deleteById(id);
+    }
+
+    public void insertarPersonaRol(EntityPersona persona){
+
+        if(persona.getRol().equals(EnumRol.ADMIN)){
+            repositoryPersona.save(persona);
+            EntityPermisos permisTemp = new EntityPermisos(true, true, true, true, persona);
+            repositoryPermiso.save(permisTemp);
+
+        } else if (persona.getRol().equals(EnumRol.USER)){
+            repositoryPersona.save(persona);
+            EntityPermisos permisTemp = new EntityPermisos(true, true, false, false, persona);
+            repositoryPermiso.save(permisTemp);
+
+        } else if (persona.getRol().equals(EnumRol.VISITANTE)){
+            repositoryPersona.save(persona);
+            EntityPermisos permisTemp = new EntityPermisos(true, false, false, false, persona);
+            repositoryPermiso.save(permisTemp);
+
+        }else{
+            System.err.println("No se pudo obtener el Rol del usuario");
+
+        }
+
+
+
     }
 
 }
