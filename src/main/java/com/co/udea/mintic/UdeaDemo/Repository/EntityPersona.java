@@ -12,7 +12,7 @@ import java.util.Collection;
 public class EntityPersona {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "nombre")
@@ -30,7 +30,18 @@ public class EntityPersona {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
     private Collection<EntityPermisos> permisosCollection;
 
+    public EntityPersona(Long id, String nombre, String apellido, Long edad, String doc, String password, EnumRol rol, Collection<EntityPermisos> permisosCollection) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.doc = doc;
+        this.password = password;
+        this.rol = rol;
+        this.permisosCollection = permisosCollection;
+    }
 
+    public EntityPersona() {
+
+    }
 }
-
-
