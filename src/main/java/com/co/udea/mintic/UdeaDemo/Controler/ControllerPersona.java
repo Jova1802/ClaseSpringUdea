@@ -12,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 
 @Api(tags = "persona", description = "Metodos para Api persona")
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/persona")
 public class ControllerPersona {
 
@@ -127,15 +130,6 @@ public class ControllerPersona {
 
     }
 
-    @DeleteMapping(path = "/udea/mintic/borrarPersona/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> borrarPersona(@PathVariable int id) {
-
-        Persona p = servicePersona.buscarPersona(id);
-        Boolean salida = servicePersona.borrarPersona(p);
-        return new ResponseEntity<Boolean>(salida, HttpStatus.OK);
-
-    }
-
     @GetMapping(path = "/udea/mintic/listarTodoJPA", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> listarTodo() {
 
@@ -150,10 +144,17 @@ public class ControllerPersona {
 
     }
 
-    @PutMapping(path = "/udea/mintic/actualizarTodoJPA", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> actualizarTodoJPA(@RequestBody EntityPersona persona){
+    @PutMapping(path = "/udea/mintic/actualizarTodoJPA")
+    public RedirectView actualizarTodoJPA(@ModelAttribute EntityPersona persona, Model modelo){
 
-        return new ResponseEntity<Boolean>(servicePersona.actualizarTodoJPA(persona), HttpStatus.OK);
+        modelo.addAttribute(persona);
+        if (servicePersona.actualizarTodoJPA(persona).equals(Boolean.TRUE)) {
+            return new RedirectView("/listaPersonas");
+        }else{
+            return new RedirectView("/error");
+        }
+
+
 
     }
 
@@ -164,20 +165,28 @@ public class ControllerPersona {
 
     }
 
+
+
+    /*/@PostMapping(path = "/udea/mintic/insertarPersonaRol", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void insertarPersonaRol(@RequestBody EntityPersona persona){
+        servicePersona.insertarPersonaRol(persona);//
+    }*/
+
+    @PostMapping(path = "/udea/mintic/insertarPersonaRol")
+    public RedirectView insertarPersonaRol(@ModelAttribute EntityPersona persona, Model modelo) {
+
+        modelo.addAttribute(persona);
+        if (servicePersona.insertarPersonaRol(persona).equals(Boolean.TRUE)) {
+            return new RedirectView("/listaPersonas");
+        }else{
+            return new RedirectView("/home");
+        }
+    }
     @DeleteMapping(path = "/udea/mintic/borrarPersonaJPA/{id}")
-    public void borrarPersonaJPA(@PathVariable Long id){
+    public RedirectView borrarPersonaJPA(@PathVariable Long id){
 
-        servicePersona.deletePersonaJPA(id);
-
+        EntityPersona personaTemp = servicePersona.buscarPersonaId(id);
+        servicePersona.deletePersonaJPAById(id);
+        return new RedirectView("/listaPersonas");
     }
-
-    @PostMapping(path = "/udea/mintic/insertarPersonaRol", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void insertarPërsonaRol(@RequestBody EntityPersona persona){
-
-        servicePersona.insertarPersonaRol(persona);
-
-    }
-
-
-
 }
