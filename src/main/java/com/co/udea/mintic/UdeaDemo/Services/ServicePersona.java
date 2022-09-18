@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,14 +110,14 @@ public class ServicePersona {
         return persona;
     }
 
-    public Boolean borrarPersona(Persona persona) {
+   /* public Boolean borrarPersona(Persona persona) {
 
         listaP.remove(persona);
 
         return Boolean.TRUE;
-    }
+    }*/
 
-    public List <EntityPersona> listarTodoJPA(){
+    public List <EntityPersona> listarTodoJPA(){ // Utilizada en frontend
 
         List<EntityPersona> List = repositoryPersona.findAll();
 
@@ -164,11 +165,13 @@ public class ServicePersona {
 
     }
 
-    public void deletePersonaJPA(Long id){
+    public void deletePersonaJPAById(Long id){
+
         repositoryPersona.deleteById(id);
+
     }
 
-    public void insertarPersonaRol(EntityPersona persona){
+    public Boolean insertarPersonaRol(EntityPersona persona){
 
         if(persona.getRol().equals(EnumRol.ADMIN)){
             repositoryPersona.save(persona);
@@ -187,11 +190,16 @@ public class ServicePersona {
 
         }else{
             System.err.println("No se pudo obtener el Rol del usuario");
-
+            return Boolean.FALSE;
         }
+        return Boolean.TRUE;
 
+    }
 
+    public EntityPersona buscarPersonaId(Long id){
+        EntityPersona personaTemp = repositoryPersona.findById(id).orElse(null);
 
+        return personaTemp;
     }
 
 }

@@ -32,4 +32,7 @@ public class EntityPermisos {
         this.borrar = borrar;
         this.idPersona = idPersona;
     }
+
+    public EntityPermisos() {
+    }
 }
