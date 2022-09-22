@@ -1,0 +1,16 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: Gmbi3OrDY5XAUSl6YHCoz8syeokq9QGb
+            client-secret: ACu61nPwVgKJpZ57CJw8iprY10Ux4aJ2Ly0VTwN7_kgLbtZGf8hxNNxx97dJAU90
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://dev-bmcs47im.us.auth0.com/

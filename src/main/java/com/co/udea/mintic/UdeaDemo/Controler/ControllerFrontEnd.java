@@ -52,7 +52,7 @@ public class ControllerFrontEnd {
     }
 
     @GetMapping(path = "/editarPersona/{id}")
-    public String editarPersona(Model modelo, @AuthenticationPrincipal OidcUser principal, @PathVariable Long id) {
+    public String editarPersona(Model modelo, @PathVariable Long id, @AuthenticationPrincipal OidcUser principal) {
 
         if (principal != null){
             EntityPersona personaTemp = servicePersona.buscarPersonaId(id);
