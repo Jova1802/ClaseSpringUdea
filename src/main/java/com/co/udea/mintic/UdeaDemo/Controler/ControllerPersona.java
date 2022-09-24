@@ -144,26 +144,9 @@ public class ControllerPersona {
 
     }
 
-    @PutMapping(path = "/udea/mintic/actualizarTodoJPA")
-    public RedirectView actualizarTodoJPA(@ModelAttribute EntityPersona persona, Model modelo){
-
-        modelo.addAttribute(persona);
-        if (servicePersona.actualizarTodoJPA(persona).equals(Boolean.TRUE)) {
-            return new RedirectView("/listaPersonas");
-        }else{
-            return new RedirectView("/error");
-        }
 
 
 
-    }
-
-    @PatchMapping(path = "/udea/mintic/actualizarParcialJPA", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void insertarParcialJPA(@RequestBody EntityPersona persona){
-
-        servicePersona.actualizarParcialJPA(persona);
-
-    }
 
 
 
@@ -189,4 +172,28 @@ public class ControllerPersona {
         servicePersona.deletePersonaJPAById(id);
         return new RedirectView("/listaPersonas");
     }
+
+    @PatchMapping(path = "/udea/mintic/actualizarParcial")
+    public RedirectView insertarParcial(@ModelAttribute EntityPersona persona, Model modelo) {
+
+        modelo.addAttribute(persona);
+
+        if (servicePersona.actualizarParcialJPA(persona).equals(Boolean.TRUE)) {
+            return new RedirectView("/listaPersonas");
+        } else {
+            return new RedirectView("/error");
+        }
+
+    }
+    @PutMapping(path = "/udea/mintic/actualizarTodoJPA")
+    public RedirectView actualizarTodoJPA(@ModelAttribute EntityPersona persona, Model modelo){
+
+        modelo.addAttribute(persona);
+        if (servicePersona.actualizarTodoJPA(persona).equals(Boolean.TRUE)) {
+            return new RedirectView("/listaPersonas");
+        }else{
+            return new RedirectView("/error");
+        }
+    }
+
 }

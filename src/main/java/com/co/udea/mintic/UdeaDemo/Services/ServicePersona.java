@@ -145,7 +145,7 @@ public class ServicePersona {
         return Boolean.TRUE;
     }
 
-    public void actualizarParcialJPA(EntityPersona persona) {
+    public Boolean actualizarParcialJPA(EntityPersona persona) {
         EntityPersona personaTemp = repositoryPersona.findById(persona.getId()).orElse(null);
 
         if (persona.getNombre() != null) {
@@ -162,7 +162,7 @@ public class ServicePersona {
 
         repositoryPersona.save(personaTemp);
 
-
+        return Boolean.TRUE;
     }
 
     public void deletePersonaJPAById(Long id){
