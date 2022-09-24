@@ -18,16 +18,14 @@ public class ControllerFrontEnd {
     ServicePersona servicePersona;
 
     @GetMapping(path = "/")
-    public String home (Model model, @AuthenticationPrincipal OidcUser principal){
+    public String home (Model model, @AuthenticationPrincipal OidcUser principal) {
 
-        return "home.html";
+        return "home";
 
     }
 
-
-
     @GetMapping(path = "/listaPersonas")
-    public String pagina2 (Model modelo, @AuthenticationPrincipal OidcUser principal){
+    public String pagina2 (Model modelo, @AuthenticationPrincipal OidcUser principal) {
 
         if (principal != null){
             List<EntityPersona> listPersonas = servicePersona.listarTodoJPA();
@@ -36,7 +34,7 @@ public class ControllerFrontEnd {
             return "listaPersonas.html";
         }
 
-        return "home.html";
+        return "home";
 
     }
 
@@ -48,7 +46,8 @@ public class ControllerFrontEnd {
 
             return "crearPersona.html";
         }
-        return "home.html";
+
+        return "home";
     }
 
     @GetMapping(path = "/editarPersona/{id}")
@@ -61,7 +60,17 @@ public class ControllerFrontEnd {
             return "editarPersona.html";
 
         }
-        return "home.html";
+        return "home";
     }
+
+    @GetMapping(path = "/editarPersonaParcial/{id}")
+    public String editarPersonaParcial(Model modelo, @PathVariable Long id) {
+
+            EntityPersona personaTemp = servicePersona.buscarPersonaId(id);
+            modelo.addAttribute("Epersona", personaTemp);
+
+            return "editarPersonaParcial.html";
+    }
+
 
 }

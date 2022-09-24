@@ -34,12 +34,13 @@
         <form class="d-flex flex-column gap-3 align-items-center" th:action="@{/persona/udea/mintic/actualizarTodoJPA}"
               th:method="put" th:object="${Epersona}">
 
-            <input th:field="*{nombre}" class="form-control" type="text" placeholder="Nombre"/>
-            <input th:field="*{apellido}" class="form-control" type="text" placeholder="Apellido"/>
-            <input th:field="*{edad}" class="form-control" type="number" placeholder="Edad"/>
-            <input th:field="*{doc}" class="form-control" type="number" placeholder="Documento"/>
-            <input th:field="*{password}" class="form-control" type="password" placeholder="Password"/>
-            <input th:field="*{rol}" class="form-control" type="text" placeholder="VISITANTE, USER, ADMIN"/>
+            <input th:field="*{nombre}" required class="form-control" type="text" placeholder="Nombre"/>
+            <input th:field="*{apellido}" required class="form-control" type="text" placeholder="Apellido"/>
+            <input th:field="*{edad}" required class="form-control" type="number" placeholder="Edad"/>
+            <input th:field="*{doc}" required class="form-control" type="number" placeholder="Documento"/>
+            <input th:field="*{password}" required class="form-control" type="password" placeholder="Password"/>
+            <input th:field="*{rol}" required class="form-control" type="text" placeholder="VISITANTE, USER, ADMIN"/>
+
             <input th:field="*{id}" class="form-control" type="hidden" />
 
             <!--<div class="dropdown">
