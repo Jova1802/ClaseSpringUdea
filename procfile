@@ -1,0 +1,1 @@
+web: java -Dserver.prt=$PORT -jartarjet/UdeaDemo-0.0.1-SPANSHOT.jar
