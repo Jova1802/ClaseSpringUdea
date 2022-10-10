@@ -202,5 +202,11 @@ public class ServicePersona {
         return personaTemp;
     }
 
+    public EntityPersona buscarPersonaDocumento(String doc){
+
+        return repositoryPersona.findByDoc(doc);
+    }
+
+
 }
 

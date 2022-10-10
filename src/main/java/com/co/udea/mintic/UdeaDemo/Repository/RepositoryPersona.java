@@ -1,7 +1,11 @@
 package com.co.udea.mintic.UdeaDemo.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
-public interface RepositoryPersona extends JpaRepository <EntityPersona, Long>, JpaSpecificationExecutor<EntityPersona> {
+@Repository
+public interface RepositoryPersona extends JpaRepository <EntityPersona, Long>{
+
+    EntityPersona findByDoc(String doc);
+
 }
