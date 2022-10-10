@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,16 +19,16 @@ public class ControllerFrontEnd {
     ServicePersona servicePersona;
 
     @GetMapping(path = "/")
-    public String home (Model model, @AuthenticationPrincipal OidcUser principal) {
+    public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
 
         return "home";
 
     }
 
     @GetMapping(path = "/listaPersonas")
-    public String pagina2 (Model modelo, @AuthenticationPrincipal OidcUser principal) {
+    public String pagina2(Model modelo, @AuthenticationPrincipal OidcUser principal) {
 
-        if (principal != null){
+        if (principal != null) {
             List<EntityPersona> listPersonas = servicePersona.listarTodoJPA();
             modelo.addAttribute("personas", listPersonas);
 
@@ -53,7 +54,7 @@ public class ControllerFrontEnd {
     @GetMapping(path = "/editarPersona/{id}")
     public String editarPersona(Model modelo, @PathVariable Long id, @AuthenticationPrincipal OidcUser principal) {
 
-        if (principal != null){
+        if (principal != null) {
             EntityPersona personaTemp = servicePersona.buscarPersonaId(id);
             modelo.addAttribute("Epersona", personaTemp);
 
@@ -64,13 +65,43 @@ public class ControllerFrontEnd {
     }
 
     @GetMapping(path = "/editarPersonaParcial/{id}")
-    public String editarPersonaParcial(Model modelo, @PathVariable Long id) {
+    public String editarPersonaParcial(Model modelo, @PathVariable Long id, @AuthenticationPrincipal OidcUser principal) {
+
+        if (principal != null) {
 
             EntityPersona personaTemp = servicePersona.buscarPersonaId(id);
             modelo.addAttribute("Epersona", personaTemp);
 
             return "editarPersonaParcial.html";
+        }
+        return "home";
     }
 
+
+    @GetMapping(path = "/buscarPersona2")
+    public String buscarPersona2(Model modelo, @RequestParam String doc, @AuthenticationPrincipal OidcUser principal) {
+
+        if (principal != null) {
+
+            EntityPersona p = servicePersona.buscarPersonaDocumento(doc);
+
+            if (p == null || doc == null) {
+                modelo.addAttribute("Bpersona", new EntityPersona());
+            } else {
+                modelo.addAttribute("Bpersona", p);
+            }
+            return "busquedaPersona.html";
+        }
+        return "home";
+    }
+
+    @GetMapping(path = "/buscarPersona")
+    public String buscarPersona(Model modelo, @AuthenticationPrincipal OidcUser principal) {
+        if (principal != null) {
+            modelo.addAttribute("Bpersona", new EntityPersona());
+            return "busquedaPersona.html";
+        }
+        return "home";
+    }
 
 }

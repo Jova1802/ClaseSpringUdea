@@ -18,6 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 @Api(tags = "persona", description = "Metodos para Api persona")
 @RestController
 @CrossOrigin
@@ -194,6 +196,19 @@ public class ControllerPersona {
         }else{
             return new RedirectView("/error");
         }
+    }
+
+    @GetMapping(path = "/udea/mintic/buscarPersonaDoc/{doc}")
+    public Boolean buscarPersonaDoc(@ModelAttribute String doc, Model modelo){
+
+        modelo.addAttribute(doc);
+        if (servicePersona.buscarPersonaDocumento(doc) != null){
+            return Boolean.TRUE;
+        }else {
+            return Boolean.FALSE;
+        }
+
+
     }
 
 }
